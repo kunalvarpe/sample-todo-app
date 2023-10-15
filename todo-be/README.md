@@ -1,6 +1,6 @@
 # Simple Python Flask API Using TODO APIs
 
-## Running locally
+## Development
 
 > [!NOTE] 
 > This app has been created using python 3.11
@@ -19,9 +19,9 @@
     $ pip install -r requirements.txt
     ```
 
-- Start the API
+- Start the API that reloads on code change
     ```console
-    $ python run.py
+    $ bin/start-gunicorn --reload
     ```
 
 - Deactivate Virtual Environment when you're done for the day
