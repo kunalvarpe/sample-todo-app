@@ -29,4 +29,3 @@ jobs:
           file: "${{ env.BE_PATH }}/Dockerfile"
           push: true
           tags: ${{ github.sha }}
-          #labels: ${{ steps.meta.outputs.labels }}
