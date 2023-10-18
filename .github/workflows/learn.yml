@@ -4,6 +4,7 @@ on: [push]
 
 env:
   BE_PATH: "./todo-be"
+  DOCKER_REPO: "sbaghel28/todo"
 
 jobs:
   push_to_registry:
@@ -28,4 +29,4 @@ jobs:
           context: ${{ env.BE_PATH }}
           file: "${{ env.BE_PATH }}/Dockerfile"
           push: true
-          tags: ${{ github.sha }}
+          tags: "${{ env.DOCKER_REPO }}:${{ github.sha }}"
