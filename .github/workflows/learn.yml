@@ -1,13 +1,20 @@
-name: learn-github-actions
-run-name: ${{ github.actor }} is learning GitHub Actions
+name: Publish Docker image
+
 on: [push]
+
 jobs:
-  check-bats-version:
+  push_to_registry:
+    name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
-          node-version: '14'
-      - run: npm install -g bats
-      - run: bats -v
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ github.sha }}
+          #labels: ${{ steps.meta.outputs.labels }}
