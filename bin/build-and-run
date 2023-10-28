@@ -16,6 +16,11 @@ Usage:
 EOF
 }
 
+fail() {
+  printf "%s\n" "EXITING: $*"
+  exit 1
+}
+
 if [[ $1 == "--help" || $1 == "-h" ]]; then
   usage
   exit 0
@@ -40,9 +45,14 @@ cleanup() {
   docker-compose down
 }
 
-build_and_run() {
-  trap "cleanup" EXIT
+ensure() {
+  command -v "$1" >/dev/null 2>&1 || fail "Please install '$1'"
+}
 
+build_and_run() {
+  ensure docker-compose
+
+  trap "cleanup" EXIT
   docker-compose up --remove-orphans --build $SERVICE_NAME
 }
 
