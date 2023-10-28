@@ -1,0 +1,29 @@
+version: '3.2'
+
+services:
+  todo-be:
+    image: todo-be
+    build:
+      context: ./todo-be
+      dockerfile: Dockerfile
+    command: "bin/start-gunicorn --reload"
+    volumes:
+      - "./todo-be/:/code/"
+    ports:
+      - "5000:5000"
+    networks:
+      - shared-network
+  todo-fe:
+    image: node:21-alpine3.17
+    command: "npm start"
+    volumes:
+      - "./todo-fe/:/code/"
+    working_dir: /code
+    ports:
+      - "3000:3000"
+    networks:
+      - shared-network
+
+networks:
+  shared-network:
+    driver: bridge
