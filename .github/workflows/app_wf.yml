@@ -8,8 +8,8 @@ jobs:
     container:
       image: "docker/whalesay"
     steps:
-    - name: Deploying the application
-      run: cowsay This is the Deploy step
+    - name: Build and Test
+      run: cowsay This is the Build and Test step
   deploy:
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
