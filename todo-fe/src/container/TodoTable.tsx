@@ -17,7 +17,7 @@ export const TodoTable: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get("https://jsonplaceholder.typicode.com/todos") //TODO: replace this with our own BE API url
+      .get("http://localhost:5000/todo") // Hardcoded for local use
       .then((resp) => {
         if (resp.data) {
           setTableData([...resp.data]);
